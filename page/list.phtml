@@ -1,0 +1,36 @@
+<?php
+
+
+?>
+
+<h1>
+    <img src="img/status/<?php echo $status; ?>.png" alt="" title="<?php echo Utils::capitalize($status); ?>" class="icon" />
+    <?php echo $title; ?>
+</h1>
+
+<?php if (empty($todos)): ?>
+    <p>No TODO items found.</p>
+<?php else: ?>
+    <ul class="list">
+        <?php foreach ($todos as $todo): ?>
+            <?php /* @var $todo Todo */ ?>
+            <?php $tooLate = $status == Todo::STATUS_PENDING && $todo->getDueOn() < new DateTime(); ?>
+            <li>
+                <?php if ($tooLate): ?>
+                    <img src="img/exclamation.png" alt="" title="Should be already done!" />
+                <?php endif; ?>
+                <img src="img/priority/<?php echo $todo->getPriority(); ?>.png" alt="Priority <?php echo $todo->getPriority(); ?>" title="Priority <?php echo $todo->getPriority(); ?>" />
+                <h3><a href="<?php echo Utils::createLink('detail', array('id' => $todo->getId())) ?>"><?php echo Utils::escape($todo->getTitle()); ?></a></h3>
+                <?php if ($todo->getDescription()): ?>
+                    <p class="description"><?php echo Utils::escape($todo->getDescription()); ?></p>
+                <?php endif; ?>
+                <p><span class="label">Created On:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getCreatedOn())); ?></p>
+                <p><span class="label">Due On:</span>
+                    <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
+                    <?php echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
+                    <?php if ($tooLate): ?></span><?php endif; ?>
+                </p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

@@ -1,0 +1,63 @@
+<?php
+?>
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+    <head>
+        <title>The Rhapsody Todo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link href="css/foundation.css" rel="stylesheet" type="text/css">
+        <link href="css/app.css" rel="stylesheet" type="text/css">
+        <link type="text/css" href="css/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="head-section">
+                <p>Rhapsody Todo</p>
+            </div>
+            <hr>
+            <div class="row" id="todosec">
+                <div class="small-12 large-5 columns">
+                    <div class="box">
+                        <div class="inner">
+                            <div class="title"><a href=""></a></div>
+                            <ul class="list">
+                                <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Todo::STATUS_PENDING)); ?>"><img src="img/status/PENDING.png" alt="" title="Pending TODOs" class="icon" />Pending TODOs</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Todo::STATUS_DONE)); ?>"><img src="img/status/DONE.png" alt="" title="Done TODOs" class="icon" />Done TODOs</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list', array('status' => Todo::STATUS_VOIDED)); ?>"><img src="img/status/VOIDED.png" alt="" title="Voided TODOs" class="icon" />Voided TODOs</a></span></li>
+                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>"><img src="img/action/add.png" alt="" title="Add TODO" class="icon" />Add TODO</a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 large-7 columns">
+                    <div class="indent">
+                        <?php if ($flashes): ?>
+                        <ul id="flashes">
+                            <?php foreach ($flashes as $flash): ?>
+                            <li><?php echo $flash; ?></li>
+                                <?php endforeach; ?>
+                        </ul>
+                            <?php endif; ?>
+                                <?php require $template; ?>
+                    </div>
+                </div>
+            </div>
+            <!-- footer -->
+            <div id="footer">
+                <div class="indent">
+                    <div class="fleft"><a href="nelsonkimaiga.azurewebsites.net">Rhapsody Todo</a>,
+                        <!--current year on footer-->
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            &copy; Copyright The Rhapsody. All rights reserved</div>
+                    </div>
+            </div>
+        </div>
+    </body>
+</html>
